@@ -1,0 +1,94 @@
+<script>
+var Array_unshift = Array.prototype.unshift;
+Array.prototype.unshift = function() { Array_unshift.apply(this, arguments); return this; }
+
+Object.defineProperty(Array.prototype, "first", { get: function() { return this[0]; } });
+Object.defineProperty(Array.prototype, "last", { get: function() { return this[this.length - 1]; } });
+
+Object.defineProperty(Array.prototype, "clear", { get: function() { this.splice(0, this.length); return this; } });
+
+Array.prototype.collect = Array.prototype.map;
+
+Array.prototype.count = function(arg) {
+  var f = function(el) { return el == arg; };
+  if (typeof arg == 'function') f = arg;
+  return this.filter(f).length;
+}
+
+Object.defineProperty(Array.prototype, "uniq", { get: function() {
+  var uniq = [], len = this.length, j, el;
+  for (j = 0; j < len; j++) {
+      el = this[j]; if (uniq.indexOf(el) == -1) uniq.push(el);
+  }
+  return uniq;
+}});
+
+Array.prototype.drop = function(n) { return this.slice(n); }
+Array.prototype.take = function(n) { return this.slice(0, n); }
+
+Array.prototype.index = function(arg) { var pos = this.indexOf(arg); return (pos != -1) ? pos : null; }
+Array.prototype.rindex = function(arg) { var pos = this.lastIndexOf(arg); return (pos != -1) ? pos : null; }
+
+Array.prototype.include = function(el) { return this.indexOf(el) != -1; }
+
+Array.prototype.delete_at = function(n) { var r = this.splice(n, 1); return (r.length > 0) ? r[0] : null }
+
+
+
+
+Object.defineProperty(String.prototype, "capitalize", { get: function() {
+  return this[0].toUpperCase() + this.slice(1).toLowerCase()
+} });
+
+Object.defineProperty(String.prototype, "size", { get: function() { return this.length; } });
+
+Object.defineProperty(String.prototype, "chr", { get: function() { return this[0]; } });
+
+Object.defineProperty(String.prototype, "lstrip", { get: function() { return this.trimLeft(); } });
+Object.defineProperty(String.prototype, "rstrip", { get: function() { return this.trimRight(); } });
+
+Object.defineProperty(String.prototype, "reverse", { get: function() { return this.split('').reverse().join('') } });
+
+String.prototype.start_with = function(s) { return this.slice(0, s.length) == s; }
+
+
+
+
+Object.defineProperty(Object.prototype, "length", { get: function() { return Object.keys(this).length; } });
+Object.defineProperty(Object.prototype, "size", { get: function() { return this.length; } });
+
+Object.defineProperty(Object.prototype, "keys", { get: function() { return Object.keys(this); } });
+
+Object.defineProperty(Object.prototype, "delete", { get: function() {
+  return function(key) {
+    if (this.hasOwnProperty(key)) {
+      var value = this[key];
+      delete this[key];
+      return value;
+    } else {
+      return null;
+    }
+  };
+}, enumerable: false });
+
+Object.defineProperty(Object.prototype, "has_key", { get: function() {
+  return this.hasOwnProperty;
+}, enumerable: false });
+
+Object.defineProperty(Object.prototype, "merge", { get: function() {
+  return function(obj) {
+    var res = {};
+    for (key in this.valueOf()) if (this.hasOwnProperty(key) && !res.hasOwnProperty(key)) res[key] = this[key];
+    for (key in obj) if (obj.hasOwnProperty(key) && !res.hasOwnProperty(key)) res[key] = obj[key];
+    return res;
+  };
+}, enumerable: false });
+
+Object.defineProperty(Object.prototype, "select", { get: function() {
+  return function(test) {
+    var res = {};
+    for (key in this.valueOf()) if (this.hasOwnProperty(key) && test(key, this[key])) res[key] = this[key]; 
+    return res;
+  };
+}, enumerable: false });
+</script>

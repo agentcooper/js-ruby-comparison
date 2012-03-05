@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ruby vs Javascript</title>
+  
+
+  <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/default.min.css">
+  <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  
+  <style>
+    table, tr, td {
+      padding-left: 20px;
+      padding-top: 20px;
+      vertical-align: top;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="containter">
+  <table>
+    <tr>
+      <td><h1>Ruby</h1></td>
+      <td><h1>Javascript</h1></td>
+    </tr>
+    
+    <tr>
+      
+      <td><ul>
+        <li><a href="https://github.com/bbatsov/ruby-style-guide">Community-driven Ruby coding style guide</a></li>
+        <li><a href="http://stackoverflow.com/questions/63998/hidden-features-of-ruby">"Ruby hidden features"</a> (Stackoverflow)</li>
+      </ul></td>
+      
+      <td><ul>
+        <li><a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">Google JavaScript style guide</a></li>
+        <li><a href="http://stackoverflow.com/questions/61088/hidden-features-of-javascript">"Javascript hidden features"</a> (Stackoverflow)</li>
+        <li><a href="http://bonsaiden.github.com/JavaScript-Garden/">Javascript Garden</a></li>
+        <li><a href="https://developer.mozilla.org/en/A_re-introduction_to_JavaScript">A re-introduction to JavaScript</a></li>
+      </ul></td>
+      
+    </tr>
+    
+    <tr><td colspan="2"><h2>Arrays</h2></td></tr>
+    
+    <tr>
+    
+      <td><pre><code class="ruby">
+a = ["1", "2"]
+a.push("3")
+
+a.map!(&:to_i) # [1, 2, 3]
+
+a.delete_at(1)
+a # [1, 3]
+
+a.reverse # [3, 1]
+
+a.unshift(777) # [777, 3, 1]
+
+
+
+
+      </code></pre></td>
+    
+      <td><pre><code class="javascript">
+var a = ["1", "2"];
+a.push("3");
+
+a = a.map(function(n) { return parseInt(n, 10); });
+
+a.splice(1, 1 /* how much */);
+a; // [1, 3]
+
+a.reverse() // [3, 1]
+
+a.unshift(777); // 777
+a; // [777, 3, 1]
+
+/* or in place: */ var b = [3, 1];
+                   [777].concat(b); // [777, 3, 1]
+      </code></pre></td>
+
+    </tr>
+    
+    <tr>
+
+      <td><pre><code class="ruby">
+a = [1, 2, 3]
+
+a.index(2) # 1 
+
+a.all?{|n| n > 4} # false
+a.any?{|n| n > 2} # true
+
+a.keep_if{|n| n > 1} # [2, 3]
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+var a = [1, 2, 3];
+
+a.indexOf(2); // 1
+
+a.every(function(n) { return n > 4; }); // false
+a.some(function(n) { return n > 2; });  // true
+
+a.filter(function(n) { return n > 1;}); // [2, 3]
+      </code></pre></td>
+
+    </tr>
+    
+    
+    
+      <td><pre><code class="ruby">
+a = ["aaa  ", "  bbb", "  ccc  "]
+
+a.map(&:strip) # ["aaa", "bbb", "ccc"]
+
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+var a = ["aaa  ", "  bbb", "  ccc  "]
+
+a.map(function(x) { return x.trim(); });               // ['aaa', 'bbb', 'ccc']
+a.map(Function.prototype.call, String.prototype.trim); // ['aaa', 'bbb', 'ccc']
+      </code></pre></td>
+
+    </tr>
+    
+    
+    
+    <tr>
+
+      <td><pre><code class="ruby">
+a = [1, 2, 3, 4, 5]
+
+a.slice(1..-2)  # [2, 3, 4]
+a[1..-2]        # [2, 3, 4]
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+var a = [1, 2, 3, 4, 5];
+
+a.slice(1, -1); // [2, 3, 4]
+
+      </code></pre></td>
+
+    </tr>
+    
+    
+    
+    <tr>
+
+      <td><pre><code class="ruby">
+a = [1, 2, 3]
+
+a.each {|n| puts n}
+
+a.each do |n|
+    puts n
+end
+
+
+for i in 0..(a.length - 1) do
+  puts a[i]
+end
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+var a = [1, 2, 3];
+
+a.forEach(function(n) { console.log(n); })
+
+
+
+
+
+
+for (var i = 0; i < a.length; i++) {
+  console.log(a[i]);
+}
+      </code></pre></td>
+
+    </tr>    
+    
+    <tr><td colspan="2"><h2>Strings</h2></td></tr>
+    
+    <tr>
+
+      <td><pre><code class="ruby">
+'hello'.index('e')    # 1
+'hello'.include? 'lo' # true
+'hello'.rindex('l')   # 3
+
+'hello' * 3           # 'hellohellohello'
+
+'a/b/c'.split('/')    # ['a', 'b', 'c']
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+'hello'.indexOf('e')             // 1
+~'hello'.indexOf('lo')           // true
+'hello'.lastIndexOf('l')         // 3
+
+(new Array(3 + 1)).join('hello') // 'hellohellohello'
+
+'a/b/c'.split('/')               // ['a', 'b', 'c']
+      </code></pre></td>
+
+    </tr>
+    
+    <tr><td colspan="2"><h2>Hash</h2></td></tr>
+    
+    <tr>
+
+      <td><pre><code class="ruby">
+h = {}
+h['a'] = 1
+h['b'] = 2
+h.keys # ['a', 'b']
+
+h.each {|key, value| puts "#{key} #{value}" }
+
+h.has_key?('c') # false
+
+h.length # 2
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+var h = {};
+h['a'] = 1;
+h['b'] = 2;
+Object.keys(h); // ['a', 'b']
+
+for (key in h) { console.log(key, h[key]); }
+
+h.hasOwnProperty('c') // false
+
+Object.keys(h).length // 2
+      </code></pre></td>
+
+    </tr>
+    
+    <tr><td colspan="2"><h2>Functions</h2></td></tr>
+    <tr>
+
+      <td><pre><code class="ruby">
+def plus_5(num = 0) num + 5 end
+
+plus_5     # 5
+plus_5(10) # 15
+
+[5, 10, 15].map { |k| plus_5(k) } # [10, 15, 20]
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+function plus_5(num) { return (num || 0) + 5; }
+
+plus_5();   // 5
+plus_5(10); // 15
+
+[5, 10, 15].map(plus_5); // [10, 15, 20]
+      </code></pre></td>
+
+    </tr>
+    
+    <tr><td colspan="2"><h2>Other</h2></td></tr>
+    <tr>
+
+      <td><pre><code class="ruby">
+prng = Random.new()
+prng.rand(5..9) # one of [5, 6, 7, 8, 9]
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+function rand(a, b) { return Math.floor(Math.random() * (b - a + 1) + a); }
+rand(5, 9); // one of [5, 6, 7, 8, 9]
+      </code></pre></td>
+
+    </tr>
+  </table>
+
+  <script>
+    var js = {
+      'splice': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice',
+      'reverse': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/reverse',
+      
+      'every' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every',
+      'some' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some',
+      'filter' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter',
+      'map' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map',
+      'forEach' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach',
+      
+      'push': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push',
+      'unshift': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift',
+      'concat': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/concat',
+      
+      'hasOwnProperty' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/HasOwnProperty',
+      'Object.keys' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/keys',
+      
+      'indexOf' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/indexOf',
+      'lastIndexOf' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/lastIndexOf',
+      
+      'trim' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/Trim',
+      
+      'parseInt' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/parseInt',
+      
+      'call' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call'
+    }
+    
+    var ruby = {
+      'unshift' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-unshift',
+      'push' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-push',
+      'delete_at' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-delete_at',
+      
+      'each' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-each',
+      'map' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-map',
+      
+      'reverse' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-reverse',
+      
+      'all' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-all-3F',
+      'any' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-any-3F',
+      'keep_if' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-keep_if',
+      
+      'split' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-split',
+      'index' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-index',
+      'rindex' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-rindex',
+      'include?' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-include-3F',
+      
+      'strip' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-strip',
+      'slice' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-slice',
+      
+      'has_key?' : 'http://ruby-doc.org/core-1.9.3/Hash.html#method-i-has_key-3F',
+      'keys' : 'http://ruby-doc.org/core-1.9.3/Hash.html#method-i-keys'
+    }
+    
+    $(function() {
+      $('.javascript').each(function(index, el) {
+        var inner = $(el).html();
+        for (f in js) inner = inner.replace(f, f.link(js[f]));
+        $(el).html(inner);
+      });
+
+      $('.ruby').each(function(index, el) {
+        var inner = $(el).html();
+        for (f in ruby) inner = inner.replace(f, f.link(ruby[f]));
+        $(el).html(inner);
+      });
+
+      hljs.initHighlightingOnLoad();
+    });
+  </script>
+</div>
+</body>
+
+</html>
