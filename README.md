@@ -1,1 +1,1 @@
-https://agentcooper.github.com/js-ruby-comparison
+http://agentcooper.github.com/js-ruby-comparison/
