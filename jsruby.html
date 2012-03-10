@@ -1,9 +1,13 @@
 <script>
+/* experimental stuff, some ruby core features implemented for native javascript objects */
+
+// http://ruby-doc.org/core-1.9.3/Array.html
+
 var Array_unshift = Array.prototype.unshift;
 Array.prototype.unshift = function() { Array_unshift.apply(this, arguments); return this; }
 
 Object.defineProperty(Array.prototype, "first", { get: function() { return this[0]; } });
-Object.defineProperty(Array.prototype, "last", { get: function() { return this[this.length - 1]; } });
+Object.defineProperty(Array.prototype, "last",  { get: function() { return this[this.length - 1]; } });
 
 Object.defineProperty(Array.prototype, "clear", { get: function() { this.splice(0, this.length); return this; } });
 
@@ -35,6 +39,7 @@ Array.prototype.delete_at = function(n) { var r = this.splice(n, 1); return (r.l
 
 
 
+// http://ruby-doc.org/core-1.9.3/String.html
 
 Object.defineProperty(String.prototype, "capitalize", { get: function() {
   return this[0].toUpperCase() + this.slice(1).toLowerCase()
@@ -53,6 +58,7 @@ String.prototype.start_with = function(s) { return this.slice(0, s.length) == s;
 
 
 
+// http://ruby-doc.org/core-1.9.3/Hash.html
 
 Object.defineProperty(Object.prototype, "length", { get: function() { return Object.keys(this).length; } });
 Object.defineProperty(Object.prototype, "size", { get: function() { return this.length; } });
@@ -91,4 +97,44 @@ Object.defineProperty(Object.prototype, "select", { get: function() {
     return res;
   };
 }, enumerable: false });
+
+
+// http://ruby-doc.org/core-1.9.3/Integer.html
+// http://ruby-doc.org/core-1.9.3/Fixnum.html
+
+Object.defineProperty(Number.prototype, "odd", { get: function() { return this.valueOf() % 2 != 0 }, enumerable: false });
+Object.defineProperty(Number.prototype, "even", { get: function() { return this.valueOf() % 2 == 0 }, enumerable: false });
+
+Object.defineProperty(Number.prototype, "times", { get: function() {
+  var n = this.valueOf();
+  return function(iterator) {
+    for (var i = 0; i <= n; i++) { iterator && iterator(i); }
+    return n;
+  };
+}, enumerable: false });
+
+Object.defineProperty(Number.prototype, "upto", { get: function() {
+  var n = this.valueOf();
+  return function(to, iterator) {
+    for (var i = n; i <= to; i++) { iterator && iterator(i); }
+    return to;
+  };
+}, enumerable: false });
+
+// http://gotochriswest.com/blog/2011/05/06/cube-root-an-beyond/
+function nthroot(x, n) {
+  try {
+    var negate = n % 2 == 1 && x < 0;
+    if(negate)
+      x = -x;
+    var possible = Math.pow(x, 1 / n);
+    n = Math.pow(possible, n);
+    if(Math.abs(x - n) < 1 && (x > 0 == n > 0))
+      return negate ? -possible : possible;
+  } catch(e){}
+}
+
+Math.cbrt = function(x) {
+  return nthroot(x, 3);
+}
 </script>

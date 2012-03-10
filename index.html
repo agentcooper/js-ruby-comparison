@@ -4,7 +4,11 @@
 <head>
   <title>Ruby vs Javascript</title>
   
-
+  <meta name="description" content="Ruby and Javascript comparison table">
+  <meta name="keywords" content="Ruby, Javascript">
+  <meta name="author" content="agentcooper">
+  <meta charset="UTF-8">
+  
   <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/default.min.css">
   <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
   
@@ -223,26 +227,30 @@ if (~'hello'.indexOf('lo')) { console.log('found'); }
 h = {}
 h['a'] = 1
 h['b'] = 2
-h.keys # ['a', 'b']
 
 h.each {|key, value| puts "#{key} #{value}" }
 
+h.keys # ['a', 'b']
 h.has_key?('c') # false
 
 h.length # 2
+
+h.delete("b")
       </code></pre></td>
 
       <td><pre><code class="javascript">
 var h = {};
 h['a'] = 1;
 h['b'] = 2;
-Object.keys(h); // ['a', 'b']
 
 for (key in h) { console.log(key, h[key]); }
 
+Object.keys(h); // ['a', 'b']
 h.hasOwnProperty('c') // false
 
 Object.keys(h).length // 2
+
+delete h.b
       </code></pre></td>
 
     </tr>
@@ -270,17 +278,99 @@ plus_5(10); // 15
 
     </tr>
     
+        <tr>
+
+      <td><pre><code class="ruby">
+def f(*args)
+  puts args
+end
+
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+function f() {
+  var args = Function.prototype.slice.call(arguments);
+  console.log(args);
+}
+      </code></pre></td>
+
+    </tr>
+    
+    <tr><td colspan="2"><h2>Classes</h2></td></tr>
+    <tr>
+
+      <td><pre><code class="ruby">
+class Person
+  attr_accessor :firstName, :lastName
+
+  def initialize(firstName, lastName)
+    @firstName = firstName
+    @lastName = lastName
+  end
+  
+  def fullName
+    @firstName + " " + @lastName
+  end
+end
+
+john = Person.new("John", "Malkovic")
+john.fullName # "John Malkovic"
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+
+
+
+Person.prototype.fullName = function() {
+  return this.firstName + " " + this.lastName;
+}
+
+
+var john = new Person("John", "Malkovic");
+john.fullName(); // "John Malkovic"
+      </code></pre></td>
+
+    </tr>
+    
+    
+    <tr><td colspan="2"><h2>Math</h2></td></tr>
+    <tr>
+
+      <td><pre><code class="ruby">
+[-5, -1, -8].max            # -1
+
+[-5, 15, 20].reduce(0, &:+) # 30
+      </code></pre></td>
+
+      <td><pre><code class="javascript">
+Math.max.apply(null, [-5, -1, -8]) // -1
+
+[-5, 15, 20].reduce(function(sum, value) { return sum + value; }, 0) // 30
+      </code></pre></td>
+
+    </tr>
+    
+    
     <tr><td colspan="2"><h2>Other</h2></td></tr>
     <tr>
 
       <td><pre><code class="ruby">
 prng = Random.new()
 prng.rand(5..9) # one of [5, 6, 7, 8, 9]
+
+a, b = b, a # switch a and b
       </code></pre></td>
 
       <td><pre><code class="javascript">
 function rand(a, b) { return Math.floor(Math.random() * (b - a + 1) + a); }
 rand(5, 9); // one of [5, 6, 7, 8, 9]
+
+a = [b, b = a][0] // do not try at home :-)
       </code></pre></td>
 
     </tr>
@@ -297,6 +387,8 @@ rand(5, 9); // one of [5, 6, 7, 8, 9]
       'map' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map',
       'forEach' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach',
       
+      'reduce': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce',
+      
       'push': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push',
       'unshift': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift',
       'concat': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/concat',
@@ -311,7 +403,9 @@ rand(5, 9); // one of [5, 6, 7, 8, 9]
       
       'parseInt' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/parseInt',
       
-      'call' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call'
+      'call' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call',
+      
+      'delete': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/delete'
     }
     
     var ruby = {
@@ -327,6 +421,8 @@ rand(5, 9); // one of [5, 6, 7, 8, 9]
       'all' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-all-3F',
       'any' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-any-3F',
       'keep_if' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-keep_if',
+      
+      'reduce' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-inject',
       
       'split' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-split',
       'index' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-index',
