@@ -75,12 +75,12 @@ a.unshift(777) # [777, 3, 1]
 var a = ["1", "2"];
 a.push("3");
 
-a = a.map(function(n) { return parseInt(n, 10); });
+a = a.map(function(n) { return +n }); // unary plus operator casts into Number
 
 a.splice(1, 1 /* how much */);
 a; // [1, 3]
 
-a.reverse() // [3, 1]
+a.reverse(); // [3, 1]
 
 a.unshift(777); // 777
 a; // [777, 3, 1]
@@ -127,7 +127,7 @@ a.map(&:strip) # ["aaa", "bbb", "ccc"]
       </code></pre></td>
 
       <td><pre><code class="javascript">
-var a = ["aaa  ", "  bbb", "  ccc  "]
+var a = ["aaa  ", "  bbb", "  ccc  "];
 
 a.map(function(x) { return x.trim(); });               // ['aaa', 'bbb', 'ccc']
 a.map(Function.prototype.call, String.prototype.trim); // ['aaa', 'bbb', 'ccc']
@@ -210,7 +210,7 @@ if 'hello'.include? 'lo' then puts 'found' end
 'hello'.indexOf('e')             // 1
 'hello'.lastIndexOf('l')         // 3
 
-if (~'hello'.indexOf('lo')) { console.log('found'); }
+if ('hello'.indexOf('lo') != -1) { console.log('found'); }
 
 (new Array(3 + 1)).join('hello') // 'hellohellohello'
 
@@ -243,10 +243,12 @@ var h = {};
 h['a'] = 1;
 h['b'] = 2;
 
-for (key in h) { console.log(key, h[key]); }
+for (key in h)
+	if (h.hasOwnProperty(key))
+		console.log(key, h[key]);
 
 Object.keys(h); // ['a', 'b']
-h.hasOwnProperty('c') // false
+h.c; // undefined, evaluates to false
 
 Object.keys(h).length // 2
 
@@ -289,8 +291,7 @@ end
 
       <td><pre><code class="javascript">
 function f() {
-  var args = Array.prototype.slice.call(arguments);
-  console.log(args);
+  console.log(arguments);
 }
       </code></pre></td>
 
@@ -348,9 +349,9 @@ john.fullName(); // "John Malkovic"
       </code></pre></td>
 
       <td><pre><code class="javascript">
-Math.max.apply(null, [-5, -1, -8]) // -1
+Math.max(-5, -1, -8); // -1
 
-[-5, 15, 20].reduce(function(sum, value) { return sum + value; }, 0) // 30
+[-5, 15, 20].reduce(function(sum, value) { return sum + value; }); // 30
       </code></pre></td>
 
     </tr>
@@ -370,7 +371,12 @@ a, b = b, a # switch a and b
 function rand(a, b) { return Math.floor(Math.random() * (b - a + 1) + a); }
 rand(5, 9); // one of [5, 6, 7, 8, 9]
 
-a = [b, b = a][0] // do not try at home :-)
+var tmp = b;
+b = a;
+a = tmp;
+
+// or:
+	a = [b, b = a][0] // do not try at home :-)
       </code></pre></td>
 
     </tr>
@@ -405,7 +411,11 @@ a = [b, b = a][0] // do not try at home :-)
       
       'call' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call',
       
-      'delete': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/delete'
+      'delete': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/delete',
+      
+      'unary plus': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/Arithmetic_Operators#.2B_(Unary_Plus)',
+      
+      '!= -1': 'http://stackoverflow.com/questions/1789945/javascript-string-contains'
     }
     
     var ruby = {
