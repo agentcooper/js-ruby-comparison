@@ -210,7 +210,7 @@ if 'hello'.include? 'lo' then puts 'found' end
 'hello'.indexOf('e')             // 1
 'hello'.lastIndexOf('l')         // 3
 
-if ('hello'.indexOf('lo')) { console.log('found'); } // everything is evaluable in JS
+if ('hello'.indexOf('lo') != -1) { console.log('found'); }
 
 (new Array(3 + 1)).join('hello') // 'hellohellohello'
 
@@ -413,7 +413,9 @@ a = tmp;
       
       'delete': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/delete',
       
-      'unary plus': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/Arithmetic_Operators#.2B_(Unary_Plus)'
+      'unary plus': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/Arithmetic_Operators#.2B_(Unary_Plus)',
+      
+      '!= -1': 'http://stackoverflow.com/questions/1789945/javascript-string-contains'
     }
     
     var ruby = {
