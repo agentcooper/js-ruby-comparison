@@ -297,6 +297,16 @@ function f() {
     </tr>
 
     <tr>
+      <td><pre><code class="ruby">
+sample_func
+
+def sample_func
+  puts "Hello World"
+end
+
+# => NameError: undefined local
+# variable or method `sample_func'
+      </code></pre></td>
       <td><pre><code class="javascript">
 sample_func();
 
@@ -305,16 +315,7 @@ function sample_func() {
 };
 
 // => Hello World
-      </code></pre></td>
 
-      <td><pre><code class="ruby">
-sample_func
-
-def sample_func
-  puts "Hello World"
-end
-
-# => NameError: undefined local variable or method `sample_func'
       </code></pre></td>
     </tr>
 
