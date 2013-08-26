@@ -3,17 +3,17 @@
 
 <head>
   <title>Ruby vs Javascript</title>
-  
+
   <meta name="description" content="Ruby and Javascript comparison table">
   <meta name="keywords" content="Ruby, Javascript">
   <meta name="author" content="agentcooper">
   <meta charset="UTF-8">
-  
+
   <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/default.min.css">
   <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  
+
   <style>
     table, tr, td {
       padding-left: 20px;
@@ -32,27 +32,27 @@
       <td><h1>Ruby</h1></td>
       <td><h1>Javascript</h1></td>
     </tr>
-    
+
     <tr>
-      
+
       <td><ul>
         <li><a href="https://github.com/bbatsov/ruby-style-guide">Community-driven Ruby coding style guide</a></li>
         <li><a href="http://stackoverflow.com/questions/63998/hidden-features-of-ruby">"Ruby hidden features"</a> (Stackoverflow)</li>
       </ul></td>
-      
+
       <td><ul>
         <li><a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">Google JavaScript style guide</a></li>
         <li><a href="http://stackoverflow.com/questions/61088/hidden-features-of-javascript">"Javascript hidden features"</a> (Stackoverflow)</li>
         <li><a href="http://bonsaiden.github.com/JavaScript-Garden/">Javascript Garden</a></li>
         <li><a href="https://developer.mozilla.org/en/A_re-introduction_to_JavaScript">A re-introduction to JavaScript</a></li>
       </ul></td>
-      
+
     </tr>
-    
+
     <tr><td colspan="2"><h2>Arrays</h2></td></tr>
-    
+
     <tr>
-    
+
       <td><pre><code class="ruby">
 a = ["1", "2"]
 a.push("3")
@@ -70,7 +70,7 @@ a.unshift(777) # [777, 3, 1]
 
 
       </code></pre></td>
-    
+
       <td><pre><code class="javascript">
 var a = ["1", "2"];
 a.push("3");
@@ -90,13 +90,13 @@ a; // [777, 3, 1]
       </code></pre></td>
 
     </tr>
-    
+
     <tr>
 
       <td><pre><code class="ruby">
 a = [1, 2, 3]
 
-a.index(2) # 1 
+a.index(2) # 1
 
 a.all?{|n| n > 4} # false
 a.any?{|n| n > 2} # true
@@ -116,9 +116,9 @@ a.filter(function(n) { return n > 1;}); // [2, 3]
       </code></pre></td>
 
     </tr>
-    
-    
-    
+
+
+
       <td><pre><code class="ruby">
 a = ["aaa  ", "  bbb", "  ccc  "]
 
@@ -134,9 +134,9 @@ a.map(Function.prototype.call, String.prototype.trim); // ['aaa', 'bbb', 'ccc']
       </code></pre></td>
 
     </tr>
-    
-    
-    
+
+
+
     <tr>
 
       <td><pre><code class="ruby">
@@ -154,9 +154,9 @@ a.slice(1, -1); // [2, 3, 4]
       </code></pre></td>
 
     </tr>
-    
-    
-    
+
+
+
     <tr>
 
       <td><pre><code class="ruby">
@@ -189,10 +189,10 @@ for (var i = 0; i < a.length; i++) {
 }
       </code></pre></td>
 
-    </tr>    
-    
+    </tr>
+
     <tr><td colspan="2"><h2>Strings</h2></td></tr>
-    
+
     <tr>
 
       <td><pre><code class="ruby">
@@ -218,9 +218,9 @@ if (~'hello'.indexOf('lo')) { console.log('found'); }
       </code></pre></td>
 
     </tr>
-    
+
     <tr><td colspan="2"><h2>Hash</h2></td></tr>
-    
+
     <tr>
 
       <td><pre><code class="ruby">
@@ -254,7 +254,7 @@ delete h.b
       </code></pre></td>
 
     </tr>
-    
+
     <tr><td colspan="2"><h2>Functions</h2></td></tr>
     <tr>
 
@@ -277,7 +277,7 @@ plus_5(10); // 15
       </code></pre></td>
 
     </tr>
-    
+
         <tr>
 
       <td><pre><code class="ruby">
@@ -295,7 +295,29 @@ function f() {
       </code></pre></td>
 
     </tr>
-    
+
+    <tr>
+      <td><pre><code class="javascript">
+sample_func();
+
+function sample_func() {
+  console.log("Hello World");
+};
+
+// => Hello World
+      </code></pre></td>
+
+      <td><pre><code class="ruby">
+sample_func
+
+def sample_func
+  puts "Hello World"
+end
+
+# => NameError: undefined local variable or method `sample_func'
+      </code></pre></td>
+    </tr>
+
     <tr><td colspan="2"><h2>Classes</h2></td></tr>
     <tr>
 
@@ -307,7 +329,7 @@ class Person
     @firstName = firstName
     @lastName = lastName
   end
-  
+
   def fullName
     @firstName + " " + @lastName
   end
@@ -336,8 +358,8 @@ john.fullName(); // "John Malkovic"
       </code></pre></td>
 
     </tr>
-    
-    
+
+
     <tr><td colspan="2"><h2>Math</h2></td></tr>
     <tr>
 
@@ -354,8 +376,8 @@ Math.max.apply(null, [-5, -1, -8]) // -1
       </code></pre></td>
 
     </tr>
-    
-    
+
+
     <tr><td colspan="2"><h2>Other</h2></td></tr>
     <tr>
 
@@ -380,62 +402,62 @@ a = [b, b = a][0] // do not try at home :-)
     var js = {
       'splice': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice',
       'reverse': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/reverse',
-      
+
       'every' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every',
       'some' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some',
       'filter' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter',
       'map' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map',
       'forEach' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach',
-      
+
       'reduce': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce',
-      
+
       'push': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push',
       'unshift': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift',
       'concat': 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/concat',
-      
+
       'hasOwnProperty' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/HasOwnProperty',
       'Object.keys' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/keys',
-      
+
       'indexOf' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/indexOf',
       'lastIndexOf' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/lastIndexOf',
-      
+
       'trim' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/Trim',
-      
+
       'parseInt' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/parseInt',
-      
+
       'call' : 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call',
-      
+
       'delete': 'https://developer.mozilla.org/en/JavaScript/Reference/Operators/delete'
     }
-    
+
     var ruby = {
       'unshift' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-unshift',
       'push' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-push',
       'delete_at' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-delete_at',
-      
+
       'each' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-each',
       'map' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-map',
-      
+
       'reverse' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-reverse',
-      
+
       'all' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-all-3F',
       'any' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-any-3F',
       'keep_if' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-keep_if',
-      
+
       'reduce' : 'http://ruby-doc.org/core-1.9.3/Enumerable.html#method-i-inject',
-      
+
       'split' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-split',
       'index' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-index',
       'rindex' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-rindex',
       'include?' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-include-3F',
-      
+
       'strip' : 'http://ruby-doc.org/core-1.9.3/String.html#method-i-strip',
       'slice' : 'http://ruby-doc.org/core-1.9.3/Array.html#method-i-slice',
-      
+
       'has_key?' : 'http://ruby-doc.org/core-1.9.3/Hash.html#method-i-has_key-3F',
       'keys' : 'http://ruby-doc.org/core-1.9.3/Hash.html#method-i-keys'
     }
-    
+
     $(function() {
       $('.javascript').each(function(index, el) {
         var inner = $(el).html();
