@@ -70,6 +70,7 @@ a.unshift(777) # [777, 3, 1]
 
 
 a.last # [1]
+
       </code></pre></td>
 
       <td><pre><code class="javascript">
@@ -89,6 +90,7 @@ a; // [777, 3, 1]
 /* or in place: */ var b = [3, 1];
                    [777].concat(b); // [777, 3, 1]
 a.slice(-1)[0]; // 1
+/* or */ a[a.length - 1]; // 1
       </code></pre></td>
 
     </tr>
